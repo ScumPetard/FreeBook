@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class SignController extends Controller
 {
@@ -38,6 +39,7 @@ class SignController extends Controller
     public function signUp(Request $request)
     {
         try {
+            /** Get 请求 */
             if ($request->isMethod('get')) {
                 return view('home.sign.signup');
             }
@@ -48,18 +50,22 @@ class SignController extends Controller
             $password = $request->get('password');
             $confirm = $request->get('confirmpassword');
 
+            /** 判断 全不能为空 */
             if (!$name || !$email || !$password || !$confirm) {
                 throw new \Exception('注册信息不能为空');
             }
 
+            /** 判断长度 */
             if (strlen($name) > 24 || strlen($email) > 20 || strlen($password) > 20) {
                 throw new \Exception('字段过长');
             }
 
+            /** 判断密码是否相等 */
             if ($password !== $confirm) {
                 throw new \Exception('两次输入密码不同');
             }
 
+            /** @var 组件数据 $data */
             $data = [
                 'name' => $name,
                 'email' => $email,
@@ -67,42 +73,82 @@ class SignController extends Controller
                 'confirm_token' => str_random(16)
             ];
 
+            /** @var 创建用户 $member */
             $member = $this->memberRepository->create($data);
 
+            /** 判断是否注册成功 */
             if (!$member) {
                 throw new \Exception('注册失败!');
             }
 
-            $result = Tools::sendEmail('signup', ['token' => $member->confirm_token, 'name' => $member->name,], $member->email);
+            /** @var 邮件数组 $bind_data */
+            $bind_data = ['token' => $member->confirm_token, 'name' => $member->name];
 
+            /** @var 发送邮件 $result */
+            $result = Tools::sendEmail('signup', $bind_data, $member->email);
+
+            /** 判断邮件是否发送成功 */
             if ($result) {
+
+                /** Put 重发邮件验证Session */
+                Session::put('signup-success',$member->id);
                 return Tools::notifyTo('注册成功!', 'success',"/member/signup-success/{$member->id}");
             }
+
+            /** 邮件发送失败 */
+            /** 删除会员 */
+            $member->delete();
+
             throw new \Exception('注册失败!');
+
         } catch (\Exception $exception) {
             return Tools::notifyTo($exception->getMessage(), 'danger');
         }
     }
 
+    /** 注册成功 */
     public function signUpSuccess(Request $request,$id)
     {
         try {
+
             $member = $this->memberRepository->find($id);
 
+            /** 判断是否有这个用户 */
             if (!$member) {
                 throw new \Exception('不存在的用户!');
             }
 
+            /** 判断是否未验证 */
             if ($member->is_confirmed == 1) {
                 throw new \Exception('用户状态错误');
             }
+
+            /** 判断是否是刚注册的用户 */
+            if (!Session::has('signup-success')) {
+                throw new \Exception('用户状态错误');
+            }
+
+            /** Get 方式请求 */
             if ($request->isMethod('get')) {
                 return view('home.sign.sign-success');
             }
 
+            /** @var 重新发送邮件 $result */
+            $result = Tools::sendEmail('signup', [
+                'token' => $member->confirm_token,
+                'name' => $member->name,],
+                $member->email
+            );
+
+            if ($result) {
+                Session::forget('signup-success');
+                return view('home.sign.signup-resetemail');
+            }
+
+            throw new \Exception('邮件发送失败,请重试');
 
         } catch (\Exception $exception){
-            return Tools::notifyTo($exception->getMessage(), 'danger');
+            return Tools::notifyTo($exception->getMessage(),'danger','/member/signup');
         }
     }
 
@@ -111,21 +157,29 @@ class SignController extends Controller
     {
         try {
 
+            /** @var 获取用户 $member */
             $member = $this->memberRepository->emailVerify($token);
 
+            /** 检查用户是否存在 */
             if (!$member) {
-                return 'error';
+                throw new \Exception('不存在的用户');
             }
 
+            /** 判断状态是否正确 */
             if ($member->is_confirmed == 1) {
-                return 'error';
+                throw new \Exception('用户状态错误');
             }
+
+            /** @var 修改信息 is_confirmed */
             $member->is_confirmed = 1;
             $member->confirm_token = str_random(16);
             $member->save();
-            return 'success';
+            Session::put('member',$member);
+
+            /** 抛出成功视图 */
+            return view('home.sign.signup-verifysuccess');
         } catch (\Exception $exception) {
-            return Tools::notifyTo($exception->getMessage(), 'danger');
+            return Tools::notifyTo($exception->getMessage(),'danger','/member/sign');
         }
 
     }

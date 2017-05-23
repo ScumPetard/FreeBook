@@ -12,7 +12,7 @@ Route::group(['prefix' => 'member', 'namespace' => 'Home'], function () {
     Route::any('/signup','SignController@signUp');
 
     /** 注册成功 */
-    Route::any('/signup-success/{id}','SignController@signUpSucces');
+    Route::any('/signup-success/{id}','SignController@signUpSuccess');
 
     /** 邮箱验证 */
     Route::get('/signup-verify/{token}','SignController@signUpVerify');

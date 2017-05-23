@@ -70,3 +70,10 @@
     color: #BBBBBB;
     border: none !important;
 }
+
+.index-usercenter{
+    cursor: pointer;
+}
+.fh5co-nav ul li {
+    margin-right: 10px !important;
+}
