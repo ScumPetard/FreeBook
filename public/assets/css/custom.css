@@ -1,0 +1,72 @@
+/* 首页登录按钮 */
+.btn-sign {
+    padding: 10px !important;
+    box-shadow: 0px 0px 8px -3px rgba(10, 10, 10, 1);
+    border-radius: 5px;
+    margin-right: 10px !important;
+    background: #33CC99;
+    color: #fff;
+}
+
+.btn-sign > button {
+    color: #fff;
+    font-size: 13px;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.btn-sign:hover {
+    background: #33DD99;
+}
+
+#fh5co-logo > a {
+    text-transform: none !important;
+    font-size: 24px !important;
+    font-weight: 300 !important;
+}
+
+#fh5co-footer {
+    padding-bottom: 0 !important;
+}
+.form-control {
+    border: none;
+}
+
+.sign-title {
+    font-size: 18px;
+    margin-bottom: 50px;
+    color: #66D37E;
+    padding-bottom: 5px;
+}
+.sign-title>a:hover {
+    border-bottom: 1px solid #66D37E;
+}
+.title-hover {
+    border-bottom: 1px solid #66D37E;
+}
+.signInput {
+    padding-left: 0px;
+    height:45px !important;
+    border-radius: 3px;
+}
+.form-control:focus {
+    border:none;
+}
+.input-group:hover {
+    border:1px solid #7ad98f !important;
+}
+.input-group {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+}
+.reset-text,.reset-text>a {
+    text-align: center;
+    font-size: 12px;
+    color: #BBBBBB !important;
+}
+.input-group-addon  {
+    background: none !important;
+    color: #BBBBBB;
+    border: none !important;
+}
