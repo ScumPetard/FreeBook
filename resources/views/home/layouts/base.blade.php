@@ -23,6 +23,12 @@
 @yield('css')
 <body>
 <div id="page">
+    @if(Session::has('notify_message'))
+        <div class="alert alert-{{  session('notify_type') }} alert-dismissible text-center">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            {{  session('notify_message') }}
+        </div>
+    @endif
     @yield('content')
 </div>
 <script src="/assets/js/jquery.min.js"></script>

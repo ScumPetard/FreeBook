@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Repository\Admin\PermissionRepository;
+use App\Repository\PermissionRepository;
 use App\Tools\Tools;
-use Bican\Roles\Models\Permission;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;

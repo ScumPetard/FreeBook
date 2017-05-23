@@ -1,16 +1,15 @@
 <?php
-namespace App\Repository\Admin;
+namespace App\Repository;
 
-use App\Repository\Repository;
-use Bican\Roles\Models\Permission;
+use App\Models\Member;
 
-class PermissionRepository implements Repository
+class MemberRepository implements Repository
 {
     protected $model;
 
-    public function __construct(Permission $permission)
+    public function __construct(Member $member)
     {
-        $this->model = $permission;
+        $this->model = $member;
     }
 
     public function selectAll()
@@ -23,14 +22,6 @@ class PermissionRepository implements Repository
         return $this->model->find($id);
     }
 
-    public function checkSlugUnique($slug)
-    {
-        $resource = $this->model->where('slug',$slug)->get();
-        if (count($resource)) {
-            return true;
-        }
-        return false;
-    }
 
     public function create(Array $array)
     {
@@ -45,5 +36,17 @@ class PermissionRepository implements Repository
     public function update($id, Array $array)
     {
         return $this->model->where('id',$id)->update($array);
+    }
+
+    /**
+     * 校验邮箱是否唯一
+     */
+    public function emailUnique($email = null)
+    {
+        $result = $this->model->where('email',$email)->first();
+        if ($result) {
+            return true;
+        }
+        return false;
     }
 }

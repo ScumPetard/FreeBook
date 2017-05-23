@@ -1,9 +1,7 @@
 <?php
-namespace App\Repository\Admin;
+namespace App\Repository;
 
 use App\Models\Book;
-use App\Repository\Repository;
-use Bican\Roles\Models\Permission;
 
 class BookRepository implements Repository
 {

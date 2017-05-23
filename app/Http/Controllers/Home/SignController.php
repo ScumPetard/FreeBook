@@ -20,8 +20,15 @@ class SignController extends Controller
         return view('home.sign.sign');
     }
 
-    public function signUp()
+    public function signUp(Request $request)
     {
-        return view('home.sign.signup');
+        try {
+            if ($request->isMethod('post')) {
+                        throw new \Exception('12312');
+            }
+            return view('home.sign.signup');
+        } catch (\Exception $exception){
+            return Tools::notifyTo($exception->getMessage(), 'danger');
+        }
     }
 }

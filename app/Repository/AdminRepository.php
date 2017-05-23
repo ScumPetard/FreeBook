@@ -1,8 +1,7 @@
 <?php
-namespace App\Repository\Admin;
+namespace App\Repository;
 
 use App\Models\User;
-use App\Repository\Repository;
 
 class AdminRepository implements Repository
 {

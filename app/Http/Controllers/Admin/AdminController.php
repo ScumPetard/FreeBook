@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Repository\Admin\AdminRepository;
-use App\Repository\Admin\PermissionRepository;
+use App\Repository\AdminRepository;
+use App\Repository\PermissionRepository;
 use App\Tools\Tools;
 use Illuminate\Http\Request;
 use Auth;
