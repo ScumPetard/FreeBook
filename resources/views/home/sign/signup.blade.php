@@ -25,41 +25,35 @@
                                 <div class="form-group">
                                     <div class="input-group ">
                                         <span class="input-group-addon"><i class="fa fa-user-o"></i></span>
-                                        <input type="text" id="memberNickName" class="form-control signInput"
-                                               placeholder="请输入你的昵称" maxlength="12" required>
+                                        <input type="text" id="memberNickName" name="name" class="form-control signInput" placeholder="请输入你的昵称" maxlength="12" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                                        <input type="email" id="memberEmail" oninput="checkEmailUnique(this);"
-                                               class="form-control signInput" placeholder="请输入你的邮箱" maxlength="20"
-                                               required>
+                                        <input type="email" id="memberEmail" name="email" oninput="checkEmailUnique(this);" class="form-control signInput" placeholder="请输入你的邮箱" maxlength="50" required>
                                     </div>
                                 </div>
                                 <div class="alert alert-danger" id="EmailErrorMessage" style="display: none"></div>
                                 <div class="alert alert-info" id="EmailSuccessMessage" style="display: none"></div>
                                 <div class="form-group">
                                     <div class="input-group ">
-                                        <span class="input-group-addon"><i class="fa fa-lock"
-                                                                           aria-hidden="true"></i></span>
-                                        <input type="password" id="memberPassword" oninput="checkPassword(this);"
-                                               class="form-control signInput" placeholder="请输入你的密码" minlength="6"
-                                               maxlength="20" required>
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                        </span>
+                                        <input type="password" id="memberPassword" name="password" oninput="checkPassword(this);" class="form-control signInput" placeholder="请输入你的密码" minlength="6" maxlength="20" required>
                                     </div>
                                 </div>
                                 <div class="alert alert-danger" id="PasswordErrorMessage" style="display: none"></div>
                                 <div class="form-group">
                                     <div class="input-group ">
-                                        <span class="input-group-addon"><i class="fa fa-lock"
-                                                                           aria-hidden="true"></i></span>
-                                        <input type="password" id="memberConfirmPassword"
-                                               oninput="checkConfirmPassword(this);" class="form-control signInput"
-                                               placeholder="请确认你的密码" minlength="6" maxlength="20" required>
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                        </span>
+                                        <input type="password" id="memberConfirmPassword" name="confirmpassword" oninput="checkConfirmPassword(this);" class="form-control signInput" placeholder="请确认你的密码" minlength="6" maxlength="20" required>
                                     </div>
                                 </div>
-                                <div class="alert alert-danger" id="ConfirmPasswordErrorMessage"
-                                     style="display: none"></div>
+                                <div class="alert alert-danger" id="ConfirmPasswordErrorMessage" style="display: none"></div>
                                 <div class="form-group text-center">
                                     {{ csrf_field() }}
                                     <input type="submit" value="注册" class="btn btn-block btn-primary btn-modify" id="submitForm">

@@ -14,7 +14,7 @@ class CreateMembersTable extends Migration
     {
         Schema::create('members', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('avatar')->comment('头像');
+            $table->string('avatar')->nullable()->comment('头像');
             $table->string('name')->comment('昵称');
             $table->string('email')->unique()->comment('邮箱');
             $table->string('password')->comment('密码');

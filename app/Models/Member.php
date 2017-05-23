@@ -57,4 +57,14 @@ class Member extends Model
 
         return Carbon::parse($date)->diffForHumans();
     }
+
+    /**
+     * 在将密码存入数据库时进行 Hash 加密
+     *
+     * @param $password
+     */
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
 }

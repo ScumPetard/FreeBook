@@ -81,13 +81,20 @@ class Tools
         }
     }
 
-
+    /**
+     * 发送邮件
+     *
+     * @param $templateName
+     * @param $bind_data
+     * @param $mail
+     */
     public static function sendEmail($templateName,$bind_data,$mail)
     {
         $template = new SendCloudTemplate($templateName, $bind_data);
-        Mail::raw($template, function ($message) use ($mail) {
+        $result = Mail::raw($template, function ($message) use ($mail) {
             $message->from('FreeBook@Gmail.com', 'FreeBook');
             $message->to($mail);
         });
+        return $result;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repository;
 
 use App\Models\Member;
@@ -35,7 +36,7 @@ class MemberRepository implements Repository
 
     public function update($id, Array $array)
     {
-        return $this->model->where('id',$id)->update($array);
+        return $this->model->where('id', $id)->update($array);
     }
 
     /**
@@ -43,10 +44,34 @@ class MemberRepository implements Repository
      */
     public function emailUnique($email = null)
     {
-        $result = $this->model->where('email',$email)->first();
+        $result = $this->model->where('email', $email)->first();
         if ($result) {
             return true;
         }
         return false;
+    }
+
+    /**
+     * 邮箱验证
+     *
+     * @param $token
+     */
+    public function emailVerify($token)
+    {
+        try {
+
+            $where = [
+                'confirm_token' => $token
+            ];
+
+            $member = $this->model->where($where)->first();
+
+            if ($member) {
+                return $member;
+            }
+            return false;
+        } catch (\Exception $exception) {
+            return false;
+        }
     }
 }
