@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class SignController extends Controller
@@ -21,9 +22,50 @@ class SignController extends Controller
     /**
      * 用户登录
      */
-    public function sign()
+    public function sign(Request $request)
     {
-        return view('home.sign.sign');
+        try {
+
+            /** Get 方式请求 */
+            if ($request->isMethod('get')) {
+                return view('home.sign.sign');
+            }
+
+            /** @var 获取输入参数 $email */
+            $email = $request->get('email');
+            $password = $request->get('password');
+
+            if (!$email || !$password) {
+                throw new \Exception('请输入完整信息');
+            }
+
+            /** @var 查询条件 $where */
+            $where = [
+                'email' => $email,
+                'enable' => 1,
+                'is_confirmed' => 1,
+            ];
+
+            /** @var 登录 $member */
+            $member = $this->memberRepository->sign($where);
+
+            if (!$member) {
+                throw new \Exception('账号信息错误或者没有验证邮件');
+            }
+
+            if (!Hash::check($password,$member->password)) {
+                throw new \Exception('密码错误');
+            }
+
+            Session::put('member',$member);
+
+            return Tools::notifyTo("{$member->name},欢迎回来",'success','/member/center');
+
+        } catch (\Exception $exception){
+            return Tools::notifyTo($exception->getMessage(), 'danger');
+        }
+
+
     }
 
     /**

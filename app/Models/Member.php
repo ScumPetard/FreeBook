@@ -58,6 +58,11 @@ class Member extends Model
         return Carbon::parse($date)->diffForHumans();
     }
 
+    public function getPraiseCountAttribute($praise_count)
+    {
+        return number_format($praise_count);
+    }
+
     /**
      * 在将密码存入数据库时进行 Hash 加密
      *

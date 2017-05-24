@@ -16,6 +16,8 @@ Route::group(['prefix' => 'member', 'namespace' => 'Home'], function () {
 
     /** 邮箱验证 */
     Route::get('/signup-verify/{token}','SignController@signUpVerify');
+
+    Route::get('/center','MemberController@center');
 });
 
 

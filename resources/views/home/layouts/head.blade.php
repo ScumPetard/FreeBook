@@ -12,9 +12,12 @@
                         <li><a href="about.html">社区</a></li>
                         <li><a href="contact.html">意见反馈</a></li>
                         @if(Session::has('member'))
+                            <li class="btn-sign">
+                                <button onclick="window.location.href='/member/sign'">登录</button>
+                            </li>
                             <li class="index-usercenter">
                                 <img class="img-circle"
-                                     src="{{Session::get('member')->avatar?Session::get('member')->avatar:'/default-avatar.jpg'}}">
+                                     src="{{Session::get('member')->avatar?Session::get('member')->avatar:'/default-avatar.jpg'}}" width="50">
                             </li>
                         @else
                             <li class="btn-sign">

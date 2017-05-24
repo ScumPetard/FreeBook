@@ -74,4 +74,18 @@ class MemberRepository implements Repository
             return false;
         }
     }
+
+    /**  */
+    public function sign(Array $where)
+    {
+        try {
+            $member = $this->model->where($where)->first();
+            if ($member) {
+                return $member;
+            }
+            return false;
+        } catch (\Exception $exception){
+            return false;
+        }
+    }
 }
