@@ -71,9 +71,22 @@
     border: none !important;
 }
 
-.index-usercenter{
-    cursor: pointer;
-}
 .fh5co-nav ul li {
     margin-right: 10px !important;
+}
+
+.has-dropdown {
+    cursor: pointer;
+}
+.user-toggle {
+    font-size: 14px !important;
+    font-weight: 400;
+    text-transform: none;
+}
+.dropdown>li>a:after {
+    background: none !important;
+}
+
+.allw {
+    width:100%;
 }

@@ -81,10 +81,10 @@ return [
         ],
         'qiniu' => [
             'driver'     => 'qiniu',
-            'access_key' => env('QINIU_ACCESS_KEY', 'nJzWO4xeRROz5PGtaE8HltNG8pxPsiIpdj-nUpc-'),
-            'secret_key' => env('QINIU_SECRET_KEY', 'VK8kAeqiiAabEMeqbku_tbQ54Gz7fA4T7IaKge8n'),
-            'bucket'     => env('QINIU_BUCKET', 'FreeBook'),
-            'domain'     => env('QINIU_DOMAIN', 'oqcxlt0r2.bkt.clouddn.com'),
+            'access_key' => env('QINIU_ACCESS_KEY'),
+            'secret_key' => env('QINIU_SECRET_KEY'),
+            'bucket'     => env('QINIU_BUCKET'),
+            'domain'     => env('QINIU_DOMAIN'),
         ],
 
     ],

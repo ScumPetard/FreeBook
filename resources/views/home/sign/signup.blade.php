@@ -25,7 +25,7 @@
                                 <div class="form-group">
                                     <div class="input-group ">
                                         <span class="input-group-addon"><i class="fa fa-user-o"></i></span>
-                                        <input type="text" id="memberNickName" name="name" class="form-control signInput" placeholder="请输入你的昵称" maxlength="12" required>
+                                        <input type="text" id="memberNickName" name="name" class="form-control signInput" placeholder="请输入你的昵称" maxlength="20" required>
                                     </div>
                                 </div>
                                 <div class="form-group">

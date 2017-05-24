@@ -1,6 +1,8 @@
 <?php
+
 namespace App\Tools;
 
+use Illuminate\Support\Facades\Storage;
 use Image;
 use Mail;
 use App\Http\Requests\Request;
@@ -50,7 +52,7 @@ class Tools
             return $resource;
 
         } catch (\Exception $exception) {
-            return Tools::notifyTo($exception->getMessage(),'error');
+            return Tools::notifyTo($exception->getMessage(), 'error');
         }
     }
 
@@ -77,7 +79,7 @@ class Tools
             $image->save($filepath);
 
         } catch (\Exception $exception) {
-            return Tools::notifyTo($exception->getMessage(),'error');
+            return Tools::notifyTo($exception->getMessage(), 'error');
         }
     }
 
@@ -88,7 +90,7 @@ class Tools
      * @param $bind_data
      * @param $mail
      */
-    public static function sendEmail($templateName,$bind_data,$mail)
+    public static function sendEmail($templateName, $bind_data, $mail)
     {
         $template = new SendCloudTemplate($templateName, $bind_data);
         $result = Mail::raw($template, function ($message) use ($mail) {
@@ -96,5 +98,30 @@ class Tools
             $message->to($mail);
         });
         return $result;
+    }
+
+    public static function uploadQiniu($filepath, $filename, $path)
+    {
+        try {
+            /** @var 初始化七牛云 Disk $disk */
+            $disk = Storage::disk('qiniu');
+
+            /** @var 拼接保存路径 $path */
+            $path = $path . '/' . $filename;
+
+            /** @var 获取文件资源 $fileContents */
+            $fileContents = file_get_contents($filepath);
+
+            /** @var 上传至七牛云 $result */
+            $result = $disk->put($path, $fileContents);
+
+            if ($result) {
+                return env('QINIU_DOMAIN').'/'.$path;
+            }
+            return false;
+        } catch (\Exception $exception) {
+            return Tools::notifyTo($exception->getMessage(), 'error');
+        }
+
     }
 }

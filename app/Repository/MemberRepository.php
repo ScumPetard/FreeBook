@@ -75,11 +75,24 @@ class MemberRepository implements Repository
         }
     }
 
-    /**  */
+    /** 登录 */
     public function sign(Array $where)
     {
         try {
             $member = $this->model->where($where)->first();
+            if ($member) {
+                return $member;
+            }
+            return false;
+        } catch (\Exception $exception){
+            return false;
+        }
+    }
+
+    public function setData($data,$id)
+    {
+        try {
+            $member = $this->model->where('id',$id)->update($data);
             if ($member) {
                 return $member;
             }

@@ -17,7 +17,17 @@ Route::group(['prefix' => 'member', 'namespace' => 'Home'], function () {
     /** 邮箱验证 */
     Route::get('/signup-verify/{token}','SignController@signUpVerify');
 
+    /**  */
+    Route::get('/signout','SignController@signOut');
+
+    /** 个人中心 */
     Route::get('/center','MemberController@center');
+
+    /** 修改资料 */
+    Route::any('/data','MemberController@data');
+
+    /** 分享 */
+    Route::any('/share','MemberController@share');
 });
 
 

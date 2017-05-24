@@ -225,4 +225,11 @@ class SignController extends Controller
         }
 
     }
+
+    /** 退出 */
+    public function signOut()
+    {
+        Session::forget('member');
+        return Tools::notifyTo('你已经安全退出','success','/');
+    }
 }
