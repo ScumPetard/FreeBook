@@ -69,7 +69,7 @@
         </aside>
         <div id="fh5co-services">
             <div class="row">
-                <div class="col-md-4 text-center animate-box">
+                <div class="col-md-4 text-center">
                     <div class="services">
                     <span class="icon">
                         <i class="icon-diamond"></i>

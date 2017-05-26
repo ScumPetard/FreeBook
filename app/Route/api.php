@@ -8,5 +8,8 @@ Route::group(['prefix' => 'api', 'namespace' => 'Service'], function () {
 
     /** 更换用户头像 */
     Route::post('/member/change-avatar','MemberController@changeAvatar');
+
+    /**  */
+    Route::get('/book/ajaxpaginate','BookController@ajaxPaginate');
 });
 
