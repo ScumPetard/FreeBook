@@ -92,12 +92,20 @@ class Tools
      */
     public static function sendEmail($templateName, $bind_data, $mail)
     {
-        $template = new SendCloudTemplate($templateName, $bind_data);
-        $result = Mail::raw($template, function ($message) use ($mail) {
-            $message->from('FreeBook@Gmail.com', 'FreeBook');
-            $message->to($mail);
-        });
-        return $result;
+        try {
+
+            /** @var 创建SendCloud对象 $template */
+            $template = new SendCloudTemplate($templateName, $bind_data);
+
+            /** @var 发送Email $result */
+            $result = Mail::raw($template, function ($message) use ($mail) {
+                $message->from('FreeBook@Gmail.com', 'FreeBook');
+                $message->to($mail);
+            });
+            return $result;
+        } catch (\Exception $exception) {
+            return false;
+        }
     }
 
     public static function uploadQiniu($filepath, $filename, $path)
@@ -115,8 +123,9 @@ class Tools
             /** @var 上传至七牛云 $result */
             $result = $disk->put($path, $fileContents);
 
+            /** 判断是否上传成功 */
             if ($result) {
-                return env('QINIU_DOMAIN').'/'.$path;
+                return env('QINIU_DOMAIN') . '/' . $path;
             }
             return false;
         } catch (\Exception $exception) {

@@ -58,6 +58,11 @@ class Member extends Model
         return Carbon::parse($date)->diffForHumans();
     }
 
+    /**
+     * 读取赞时对赞进行格式化
+     * @param $praise_count
+     * @return string
+     */
     public function getPraiseCountAttribute($praise_count)
     {
         return number_format($praise_count);

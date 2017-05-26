@@ -36,6 +36,7 @@
                     <li><a href="/admin/admin"><i class="fa fa-circle-o"></i> 管理员设置</a></li>
                     <li><a href="/admin/permission"><i class="fa fa-circle-o"></i> 权限设置</a></li>
                     <li><a href="/admin/book"><i class="fa fa-circle-o"></i> Book设置</a></li>
+                    <li><a href="/admin/author"><i class="fa fa-circle-o"></i> 作者设置</a></li>
                 </ul>
             </li>
             <li class="treeview">

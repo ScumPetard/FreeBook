@@ -109,10 +109,10 @@
         function showResponse(response) {
             layer.closeAll('loading');
             if (response['code']) {
-                $('#avatar-preview').attr('src',response['url']);
+                $('#avatar-preview').attr('src', response['url']);
                 return layer.msg('更换头像成功');
             }
-            return layer.msg(response['message'],{time:500},function () {
+            return layer.msg(response['message'], {time: 500}, function () {
                 location.reload();
             });
         }

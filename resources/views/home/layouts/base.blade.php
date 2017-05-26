@@ -13,11 +13,8 @@
     <link rel="stylesheet" href="/assets/css/bootstrap.css">
     <link rel="stylesheet" href="/assets/css/magnific-popup.css">
     <link rel="stylesheet" href="/assets/css/flexslider.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="/assets/css/style.css">
-    <script src="/assets/js/modernizr-2.6.2.min.js"></script>
-    <!--[if lt IE 9]>
-    <script src="/assets/js/respond.min.js"></script>
-    <![endif]-->
     <link rel="stylesheet" href="/assets/css/custom.css">
 </head>
 @yield('css')
@@ -34,12 +31,9 @@
 <script src="/assets/js/jquery.min.js"></script>
 <script src="/assets/js/jquery.easing.1.3.js"></script>
 <script src="/assets/js/bootstrap.min.js"></script>
-<script src="/assets/js/jquery.waypoints.min.js"></script>
-<script src="/assets/js/jquery.flexslider-min.js"></script>
-<script src="/assets/js/jquery.magnific-popup.min.js"></script>
-<script src="/assets/js/magnific-popup-options.js"></script>
-<script src="/assets/js/jquery.countTo.js"></script>
+
 <script src="/assets/js/main.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/wow/1.1.2/wow.min.js"></script>
 @yield('js')
 </body>
 </html>

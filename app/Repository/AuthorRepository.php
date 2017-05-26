@@ -1,15 +1,15 @@
 <?php
 namespace App\Repository;
 
-use App\Models\Book;
+use App\Models\Author;
 
-class BookRepository implements Repository
+class AuthorRepository implements Repository
 {
     protected $model;
 
-    public function __construct(Book $book)
+    public function __construct(Author $author)
     {
-        $this->model = $book;
+        $this->model = $author;
     }
 
     public function selectAll()
@@ -37,10 +37,4 @@ class BookRepository implements Repository
     {
         return $this->model->where('id',$id)->update($array);
     }
-
-    public function paginate($int,$where = [])
-    {
-        return $this->model->where($where)->paginate($int);
-    }
-
 }

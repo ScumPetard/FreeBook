@@ -1,7 +1,7 @@
 <div class="container-wrap">
     <footer id="fh5co-footer" role="contentinfo">
         <div class="row">
-            <div class="col-md-3 fh5co-widget">
+            <div class="col-md-3 fh5co-widget ">
                 <h4>About Neat</h4>
                 <p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos cumque dicta adipisci architecto culpa amet.</p>
             </div>

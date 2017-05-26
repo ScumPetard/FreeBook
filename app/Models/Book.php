@@ -5,19 +5,26 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * 图书
+ *
+ * Class Book
+ * @package App\Models
+ */
 class Book extends Model
 {
     protected $table = 'books';
 
     protected $fillable =
         [
-            'name',     // 名称
-            'preview',      // 预览
-            'description',      //描述
-            'download_count',       // 下载次数
-            'read_count',   // 阅读次数
-            'favorite_count',   //收藏次数
-            'enable'    // 使用状态 0 => Hideen 1 => start
+            'name',     // 书名
+            'preview',      // 封面
+            'intro',      //简介
+            'author_id',      //作者ID
+            'click_count',       // 点击量
+            'favorite_count',   // 关注数
+            'praise_count',   //赞数量
+            'enable',    // 是否启用 0 => 否 1 => 是
         ];
 
     /**
@@ -48,5 +55,41 @@ class Book extends Model
         }
 
         return Carbon::parse($date)->diffForHumans();
+    }
+
+    /**
+     * 读取赞时对赞进行格式化
+     * @param $praise_count
+     * @return string
+     */
+    public function getPraiseCountAttribute($praise_count)
+    {
+        return number_format($praise_count);
+    }
+
+    /**
+     * 读取点击数时对点击数进行格式化
+     * @param $praise_count
+     * @return string
+     */
+    public function getClickCountAttribute($click_count)
+    {
+        return number_format($click_count);
+    }
+
+    /**
+     * 读取收藏数时对收藏数进行格式化
+     * @param $praise_count
+     * @return string
+     */
+    public function getFavoriteCountAttribute($favorite_count)
+    {
+        return number_format($favorite_count);
+    }
+
+    /** 作者 */
+    public function author()
+    {
+        return $this->belongsTo(Author::class);
     }
 }
